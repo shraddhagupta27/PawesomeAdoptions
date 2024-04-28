@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Pawesome Adoptions</h1>
+    <p class="lead">Where Every Paw Finds a Home!</p>
+</div>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Available Pets</h2>
+    <form action="{{ url_for('index') }}" method="get" class="mb-4">
+        <div class="form-row align-items-end">
+            <!-- Name Filter -->
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Name" name="name" value="{{ request.args.get('name', '') }}">
+            </div>
+            <!-- Breed Filter with Searchable Dropdown -->
+            <div class="col">
+                <select class="form-control selectpicker" name="breed" data-live-search="true">
+                    <option value="">All Breeds</option>
+                    {% for breed in breeds %}
+                    <option value="{{ breed }}" {% if request.args.get('breed') == breed %}selected{% endif %}>{{ breed }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- Gender Filter -->
+            <div class="col">
+                <select class="form-control" name="gender">
+                    <option value="">Any Gender</option>
+                    <option value="Male" {% if request.args.get('gender') == 'Male' %}selected{% endif %}>Male</option>
+                    <option value="Female" {% if request.args.get('gender') == 'Female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+            <!-- Age Filter -->
+            <div class="col">
+                <select class="form-control" name="age">
+                    <option value="">Any Age</option>
+                    {% for age in ages %}
+                    <option value="{{ age }}" {% if request.args.get('age') == age %}selected{% endif %}>{{ age }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- Size Filter -->
+            <div class="col">
+                <select class="form-control" name="size">
+                    <option value="">Any Size</option>
+                    {% for size in sizes %}
+                    <option value="{{ size }}" {% if request.args.get('size') == size %}selected{% endif %}>{{ size }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- Sorting Dropdown -->
+            <div class="col">
+                <select class="form-control" name="sort">
+                    <option value="date_desc" {% if request.args.get('sort') == 'date_desc' %}selected{% endif %}>Newest Listed</option>
+                    <option value="age" {% if request.args.get('sort') == 'age' %}selected{% endif %}>Age</option>
+                    <option value="size" {% if request.args.get('sort') == 'size' %}selected{% endif %}>Size</option>
+                </select>
+            </div>
+            <!-- Filter and Reset Buttons -->
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Reset</a>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        {% for pet in pets.items %}
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <img src="{{ pet.pet_url | default('static/default-pet.jpg', true) }}" class="card-img-top" alt="{{ pet.name }}" style="height: 200px; object-fit: cover;">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ pet.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ pet.breed }}</h6>
+                    <p class="card-text">
+                        Age: {{ pet.age }}<br>
+                        Gender: {{ pet.gender }}<br>
+                        Size: {{ pet.size }}
+                    </p>
+                    <a href="{{ url_for('pet_detail', pet_id=pet.pet_id) }}" class="btn btn-primary mt-auto">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <p class="text-center">No pets found. Please check back later or adjust your filters!</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="pagination justify-content-center">
+        <nav aria-label="Pet pagination">
+            <ul class="pagination">
+                <li class="page-item {% if not pets.has_prev %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('index', page=pets.prev_num) }}">Previous</a>
+                </li>
+                {% for page_num in pets.iter_pages() %}
+                <li class="page-item {% if page_num == pets.page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+                </li>
+                {% endfor %}
+                <li class="page-item {% if not pets.has_next %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('index', page=pets.next_num) }}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.selectpicker').selectpicker();
+    });
+    </script>
+
+{% endblock %}

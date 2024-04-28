@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container user-details-page mt-4">
+  <h1>User Profile</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Initial User Details</h2>
+      <p><strong>Name:</strong> {{ current_user.name }}</p>
+      <p><strong>Email:</strong> {{ current_user.email }}</p>
+      <p><strong>Phone:</strong> {{ current_user.phone }}</p>
+      <p><strong>Address:</strong> {{ current_user.address }}</p>
+    </div>
+    <div class="col-md-6">
+      <h2>Edit User Details</h2>
+      <form action="{{ url_for('update_user_details') }}" method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="name"
+            value="{{ current_user.name }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            id="email"
+            value="{{ current_user.email }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phone"
+            id="phone"
+            value="{{ current_user.phone }}"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <textarea class="form-control" name="address" id="address" required>
+{{ current_user.address }}</textarea
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Update Details</button>
+      </form>
+    </div>
+  </div>
+
+  <h2 class="mt-4">My Adoption Requests</h2>
+  {% for request in user_requests %}
+  <div class="card mt-2">
+    <div class="card-body">
+      <!-- <h5 class="card-title">Request ID: {{ request.request_id }}</h5> -->
+      <p class="card-text">
+        <a href="{{ url_for('pet_detail', pet_id=request.pet_id) }}"
+          >Pet ID: {{request.pet_id}}</a
+        >
+      </p>
+      <p class="card-text">Requested At: {{ request.requested_at}}</p>
+      <p class="card-text">
+        Status: {% if request.request_status == 'pending' %} Pending {% elif
+        request.request_status == 'accepted' %} Accepted {% elif
+        request.request_status == 'declined' or request.request_status ==
+        'adopted' %} Declined {% endif %}
+      </p>
+    </div>
+  </div>
+  {% else %}
+  <p>No adoption requests found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

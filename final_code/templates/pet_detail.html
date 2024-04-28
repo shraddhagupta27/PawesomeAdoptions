@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block title %} {{pet.name}} Details {% endblock %}
+{% block content %}
+<div class="pet-detail-page">
+  <div class="row">
+    <div class="col-lg-6">
+      <img
+        src="{{ pet.pet_url | default('static/default-pet.jpg', true) }}"
+        alt="{{ pet.name }}"
+        class="img-fluid rounded"
+      />
+    </div>
+    <div class="col-lg-6">
+      <h2 class="display-4">{{ pet.name }}</h2>
+      <p class="lead">
+        <span class="badge badge-primary">{{ pet.breed }}</span>
+        <span class="badge badge-secondary">{{ pet.gender }}</span>
+        <span class="badge badge-info">{{ pet.size }}</span>
+      </p>
+      <h5>Age: {{ pet.age }}</h5>
+      <div class="pet-details">
+        {% if pet.spayed_neutered %}
+        <span class="badge badge-success">Spayed/Neutered</span>
+        {% endif %} {% if pet.house_trained %}
+        <span class="badge badge-success">House Trained</span>
+        {% endif %} {% if pet.shots_current %}
+        <span class="badge badge-success">Shots Current</span>
+        {% endif %}
+      </div>
+      {% if pet.organization_id %}
+      <h5>Organization ID: {{ pet.organization_id }}</h5>
+      {% endif %}
+      <p>{{ pet.description | default('No description available.') }}</p>
+      <div class="my-4">
+        {% if current_user.is_authenticated %} {% if pet.pet_status ==
+        'adoptable' %}
+        <form
+          action="{{ url_for('request_adoption', pet_id=pet.pet_id) }}"
+          method="post"
+        >
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <button type="submit" class="btn btn-primary btn-lg">
+            Adopt Me!
+          </button>
+        </form>
+        {% else %}
+        <button class="btn btn-secondary btn-lg disabled">
+          Already Adopted
+        </button>
+        {% endif %} {% else %}
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg"
+          >Login to Adopt</a
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="col">
+      <a href="{{ url_for('index') }}" class="btn btn-outline-secondary"
+        >&larr; Back to All Pets</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,309 @@
+:root {
+  --dark-moss-green: #606c38;
+  --pakistan-green: #283618;
+  --cornsilk: #fefae0;
+  --earth-yellow: #dda15e;
+  --tigers-eye: #bc6c25;
+}
+
+/* General Body Styles */
+body {
+  font-family: "Arial", sans-serif;
+  color: var(--dark-moss-green);
+  background-color: var(--cornsilk);
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+  background-color: var(--pakistan-green);
+  color: var(--cornsilk);
+}
+
+.navbar a {
+  color: var(--cornsilk);
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+  color: var(--earth-yellow);
+}
+
+/* Jumbotron */
+.jumbotron {
+  background-color: var(--dark-moss-green);
+  color: var(--cornsilk);
+}
+
+.jumbotron p.lead {
+  color: var(--earth-yellow);
+}
+
+/* Cards */
+.card {
+  transition: box-shadow 0.3s ease-in-out;
+  border: 1px solid var(--dark-moss-green);
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-img-top:hover {
+  transform: scale(1.03);
+}
+
+.card-body {
+  background-color: var(--cornsilk);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.card-title {
+  color: var(--pakistan-green);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--earth-yellow);
+  border-color: var(--tigers-eye);
+}
+
+.btn-primary:hover {
+  background-color: var(--tigers-eye);
+  border-color: var(--earth-yellow);
+}
+
+.btn-outline-secondary {
+  border-color: var(--dark-moss-green);
+  color: var(--dark-moss-green);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--dark-moss-green);
+  color: var(--cornsilk);
+}
+
+/* Form Controls */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  background-color: var(--cornsilk);
+  border: 1px solid var(--dark-moss-green);
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+select:hover {
+  border-color: var(--tigers-eye);
+}
+
+/* Pagination */
+.pagination a {
+  color: var(--dark-moss-green);
+}
+
+.pagination a:hover {
+  color: var(--cornsilk);
+  background-color: var(--pakistan-green);
+}
+
+.pagination .active a {
+  background-color: var(--earth-yellow);
+  border-color: var(--tigers-eye);
+}
+
+/* Pet Details Page */
+.pet-detail-page {
+  padding: 20px;
+  background-color: var(--cornsilk);
+}
+
+.pet-detail-page h2.display-4 {
+  color: var(--dark-moss-green);
+}
+
+.pet-detail-page .badge {
+  font-size: 1em;
+  padding: 0.25em 0.6em;
+}
+
+.badge-primary {
+  background-color: var(--pakistan-green);
+  color: var(--cornsilk);
+}
+
+.badge-secondary {
+  background-color: var(--earth-yellow);
+  color: var(--dark-moss-green);
+}
+
+.badge-success {
+  background-color: var(--tigers-eye);
+  color: var(--cornsilk);
+}
+
+.pet-detail-page img {
+  width: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid var(--dark-moss-green);
+}
+
+.pet-detail-page .btn-primary {
+  background-color: var(--pakistan-green);
+  border-color: var(--dark-moss-green);
+}
+
+.pet-detail-page .btn-primary:hover {
+  background-color: var(--earth-yellow);
+  border-color: var(--tigers-eye);
+}
+
+.pet-detail-page .btn-secondary {
+  background-color: var(--dark-moss-green);
+  border-color: var(--pakistan-green);
+}
+
+.pet-detail-page .btn-secondary:hover {
+  background-color: var(--tigers-eye);
+  color: var(--cornsilk);
+}
+
+.pet-detail-page .container {
+  border-top: 5px solid var(--pakistan-green);
+  background-color: var(--cornsilk);
+  padding-top: 20px;
+}
+
+.pet-detail-page .container h1,
+.pet-detail-page .container h2,
+.pet-detail-page .container h3,
+.pet-detail-page .container h4,
+.pet-detail-page .container h5,
+.pet-detail-page .container h6 {
+  color: var(--dark-moss-green);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .pet-detail-page img {
+    margin-bottom: 15px;
+  }
+}
+
+/* User Details Page Specific Styles */
+.user-details-page {
+  background-color: #ffd5a5;
+  color: var(--pakistan-green);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-details-page h1,
+.user-details-page h2 {
+  color: var(--dark-moss-green);
+}
+
+.user-details-page .form-group label {
+  color: var(--pakistan-green);
+  margin-bottom: 5px;
+}
+
+.user-details-page .form-control {
+  background-color: transparent;
+  border: 2px solid var(--dark-moss-green);
+  color: var(--pakistan-green);
+}
+
+.user-details-page .form-control:focus {
+  border-color: var(--tigers-eye);
+  box-shadow: none;
+}
+
+.user-details-page .btn-primary {
+  margin-top: 10px;
+}
+
+.user-details-page .card {
+  margin-top: 15px;
+  background-color: var(--cornsilk);
+  border-left: 5px solid var(--tigers-eye);
+}
+
+.user-details-page .card-body {
+  padding: 15px;
+}
+
+.user-details-page .card-title {
+  color: var(--pakistan-green);
+}
+
+.user-details-page .card-text {
+  color: var(--dark-moss-green);
+}
+
+.user-details-page .card-body a {
+  color: var(--dark-moss-green);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.user-details-page .card-body a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive styles for User Details Page */
+@media (max-width: 768px) {
+  .user-details-page .row {
+    flex-direction: column;
+  }
+
+  .user-details-page .col-md-6 {
+    margin-bottom: 20px;
+  }
+}
+
+/* About Us Page Specific Styles */
+.about-page {
+  background-color: #ffd5a5;
+  color: var(--pakistan-green);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about-page h1 {
+  border-bottom: 2px solid var(--earth-yellow);
+  padding-bottom: 10px;
+}
+
+.about-page p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.contact-methods h2 {
+  color: var(--dark-moss-green);
+}
+
+.contact-methods ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-methods li {
+  padding: 8px 0;
+  font-size: 1.1em;
+}
+
+.contact-methods li i {
+  color: var(--tigers-eye);
+  margin-right: 10px;
+}

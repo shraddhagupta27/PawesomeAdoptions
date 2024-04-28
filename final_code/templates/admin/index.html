@@ -1,0 +1,34 @@
+{% extends 'admin/master.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Admin Dashboard</h1>
+      <p>
+        Welcome to the Admin Dashboard! From here, you can manage all the
+        database entities.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    {% for model, view in admin._views %}
+    <div class="col-md-4">
+      <div class="admin-model-item">
+        <h2>{{ model.name }}</h2>
+        <ul>
+          <li>
+            <a href="{{ url_for(view.endpoint + '.index_view') }}"
+              >View Records</a
+            >
+          </li>
+          <li>
+            <a href="{{ url_for(view.endpoint + '.create_view') }}"
+              >Create Record</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
