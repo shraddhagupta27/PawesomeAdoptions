@@ -17,7 +17,7 @@ from wtforms.validators import InputRequired, DataRequired
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pet_adoption.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SECRET_KEY'] = 'qwerty'
 csrf = CSRFProtect(app)
 
 db = SQLAlchemy(app)
@@ -217,9 +217,9 @@ def populate_org_from_csv(csv_path):
 with app.app_context():
     db.create_all()
     if not Pet.query.first():
-        populate_pets_from_csv('D:/Sarvesh/USA/IUB/SEM 2 Spring 2024/DSCI-D532 Applied Database Technologies/proj_adt/proj_adt/Pet.csv')
+        populate_pets_from_csv('./Pet.csv')
     if not Organization.query.first():
-        populate_org_from_csv('D:/Sarvesh/USA/IUB/SEM 2 Spring 2024/DSCI-D532 Applied Database Technologies/proj_adt/proj_adt/Org.csv')
+        populate_org_from_csv('./Org.csv')
     # name = "Sarvesh"
     # email = "admin.sarvesh@gmail.com"
     # password = "admin123"
